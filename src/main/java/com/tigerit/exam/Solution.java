@@ -83,13 +83,28 @@ public class Solution implements Runnable {
 
                 //selection
                 String s = readLine();
-                String[] ss = s.split(" |\\,|\\.");
+                String[] ss = s.split(" |,\\s*|\\.");
+                String[] ss2 = s.split(" |,\\s*");
                 Integer sl = ss.length;
 
                 /*System.out.println();
                 System.out.println(".......SELECTION.........");
+
+                System.out.println(ss.length+" "+ ss2.length);
+                for(int i=0; i<ss.length; i++)
+                {
+                    System.out.println(i+"..."+ss[i]+"...");
+                }
+                for(int i=0; i<ss2.length; i++)
+                {
+                    System.out.println(i+"..."+ss2[i]+"...");
+                }
                 for(String sss: ss){
                 	System.out.print(sss+" ");
+                }
+                System.out.println();
+                for(String sss: ss2){
+                    System.out.print(sss+" ");
                 }
                 System.out.println();*/
 
@@ -148,6 +163,14 @@ public class Solution implements Runnable {
                     for(int i=0; i<ColumnNameList[t2].length; i++) System.out.print(ColumnNameList[t2][i]+" ");
                     System.out.println();
                 }
+                else 
+                {
+                    for(int k=2; k<ss.length; k+=2)
+                    {
+                        System.out.print(ss[k]+" ");
+                    }
+                    System.out.println();
+                }
                 for(int i=0; i<DbMat[t1].length; i++)
                 {
                     for(int j=0; j<DbMat[t2].length; j++)
@@ -158,8 +181,17 @@ public class Solution implements Runnable {
                             {
                                 for(int i2=0; i2<DbMat[t1][i].length; i2++) System.out.print(DbMat[t1][i][i2]+" ");
                                 for(int j2=0; j2<DbMat[t2][j].length; j2++) System.out.print(DbMat[t2][j][j2]+" ");
-                                System.out.println();
                             }   
+                            else
+                            {
+                                for(int k=1; k<ss.length; k+=2)
+                                {
+                                    Integer tt1 = Table.get(table_alias.get(ss[k]));
+                                    if(tt1.equals(t1)) System.out.print(DbMat[tt1][i][Column.get(ss[k+1])]+" ");
+                                    else System.out.print(DbMat[tt1][j][Column.get(ss[k+1])]+" ");
+                                }                                
+                            }
+                            System.out.println();
                         }
                     }
                 }
