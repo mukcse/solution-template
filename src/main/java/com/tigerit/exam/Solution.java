@@ -10,6 +10,15 @@ import  java.util.*;                                                            
  * application's execution points start from inside run method.
  */
 public class Solution implements Runnable {
+	    public static String[] tokenize(String s, String delim){
+        StringTokenizer st = new StringTokenizer(s,delim);        
+        Integer sl = st.countTokens();
+        String[] ss = new String[sl];
+	    for(int i=0; i<sl; i++) {  
+	        ss[i]=st.nextToken();  
+	    }
+	    return ss;
+    }
     @Override
     public void run() {
         // your application entry point
@@ -36,22 +45,13 @@ public class Solution implements Runnable {
 
 
                 String tmp = readLine();
-                StringTokenizer st = new StringTokenizer(tmp," ");
-                Integer len = st.countTokens();
-                String[] tmpA = new String[len];
-			    for(int i=0; i<len; i++) {  
-			        tmpA[i]=st.nextToken();  
-			    }
+                String[] tmpA = tokenize(tmp," ");
                 nC = Integer.parseInt(tmpA[0]);
                 nD = Integer.parseInt(tmpA[1]);
 
     			String ColumnNameLine = readLine();
-    			StringTokenizer st2 = new StringTokenizer(ColumnNameLine," ");
-                Integer len2 = st2.countTokens();
-                ColumnNameList[it] = new String[len2];
-			    for(int i=0; i<len2; i++) {  
-			        ColumnNameList[it][i]=st2.nextToken();  
-			    }
+    			ColumnNameList[it] = tokenize(ColumnNameLine," ");
+
                 for(String str:ColumnNameList[it]){
                     Column.put(str, ColumnId++);
                 }
@@ -60,12 +60,8 @@ public class Solution implements Runnable {
     			for(int i=0; i<nD; i++)
     			{
                     String tmp2 = readLine();
-                    StringTokenizer st3 = new StringTokenizer(tmp2," ");
-	                Integer len3 = st3.countTokens();
-	                String[] tmpA2 = new String[len3];
-				    for(int k=0; k<len3; k++) {  
-				        tmpA2[k]=st3.nextToken();  
-				    }
+                    String[] tmpA2 = tokenize(tmp2," ");
+
     				for(int j=0; j<nC; j++)
     				{
                         DbMat[it][i][j] = Integer.parseInt(tmpA2[j]);
@@ -98,12 +94,7 @@ public class Solution implements Runnable {
 
                 //selection
                 String s = readLine();
-                StringTokenizer st4 = new StringTokenizer(s," ,.");
-                Integer sl = st4.countTokens();
-                String[] ss = new String[sl];
-			    for(int i=0; i<sl; i++) {  
-			        ss[i]=st4.nextToken();  
-			    }
+                String[] ss=tokenize(s," ,.");
 
                 /*System.out.println();
                 System.out.println(".......SELECTION.........");
@@ -112,15 +103,12 @@ public class Solution implements Runnable {
                 }
                 System.out.println();*/
 
+
+
                 //1st table
                 String as = readLine();
-                StringTokenizer st5 = new StringTokenizer(as," ");
-                Integer al = st5.countTokens();
-                String[] aa = new String[al];
-			    for(int i=0; i<al; i++) {  
-			        aa[i]=st5.nextToken();  
-			    }
-                if(al==2) t1 = Table.get(aa[1]);
+                String[] aa = tokenize(as," ");
+                if(aa.length==2) t1 = Table.get(aa[1]);
                 else
                 {
                     table_alias.put(aa[2], aa[1]);
@@ -134,15 +122,11 @@ public class Solution implements Runnable {
                 System.out.println();*/
 
 
+
                 //2nd table
                 String bs = readLine();
-                StringTokenizer st6 = new StringTokenizer(bs," ");
-                Integer bl = st6.countTokens();
-                String[] bb = new String[bl];
-			    for(int i=0; i<bl; i++) {  
-			        bb[i]=st6.nextToken();  
-			    }
-                if(bl==2) t2 = Table.get(bb[1]);
+                String[] bb = tokenize(bs," ");
+                if(bb.length==2) t2 = Table.get(bb[1]);
                 else
                 {
                     table_alias.put(bb[2], bb[1]);
@@ -155,14 +139,11 @@ public class Solution implements Runnable {
                 }
                 System.out.println();*/
 
+
+
                 //condition
-                String c = readLine();                
-                StringTokenizer st7 = new StringTokenizer(c," .=");
-                Integer cl = st7.countTokens();
-                String[] cc = new String[cl];
-			    for(int i=0; i<cl; i++) {  
-			        cc[i]=st7.nextToken();  
-			    }                
+                String c = readLine();  
+                String[] cc = tokenize(c," .=");                             
                 c1=Column.get(cc[2]);
                 c2=Column.get(cc[4]);
 
@@ -172,6 +153,8 @@ public class Solution implements Runnable {
                 }
                 System.out.println();*/
 			
+
+
 
                 if(ss[1].equals("*"))
                 {
